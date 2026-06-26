@@ -4,128 +4,132 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fiche d'inscription – Loisir Automne 2026 – CNPA Lesconil</title>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --ocean: #1a4a6e;
-      --ocean-mid: #2e6a9e;
-      --ocean-light: #e8f2f9;
-      --sand: #f5f1ea;
-      --wave: #2e7db5;
-      --seafoam: #4aab8c;
-      --text: #1c1c1c;
-      --muted: #5a6470;
-      --rule: #ccd8e0;
-      --error: #c0392b;
-      --radius: 8px;
+      --blue:      #22b2c3;
+      --dark-blue: #135460;
+      --black:     #221f20;
+      --gray:      #eff0f4;
+      --gray-mid:  #dde0e2;
+      --gray-mute: #b1b3b6;
+      --muted:     #6f7072;
+      --white:     #fff;
+      --error:     #df8080;
+      --radius:    5px;
+      --font:      'Montserrat', sans-serif;
     }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: var(--sand);
-      color: var(--text);
+      font-family: var(--font);
+      font-size: 16px;
+      color: var(--black);
+      background: var(--gray);
       min-height: 100vh;
     }
 
-    header {
-      background: var(--ocean);
-      color: white;
-      padding: 1.5rem;
+    /* ── HEADER ── */
+    .site-header {
+      background: var(--white);
+      box-shadow: 0 6px 6px rgba(27,24,24,.1);
+      padding: 12px 1.5rem;
       display: flex;
       align-items: center;
-      gap: 1.25rem;
+      gap: 1rem;
     }
 
-    header div h1 {
-      font-family: 'Source Serif 4', serif;
-      font-size: 1.2rem;
-      font-weight: 600;
+    .site-branding {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      text-decoration: none;
+      color: var(--black);
+    }
+
+    .site-branding__logo {
+      height: 64px;
+      width: auto;
+    }
+
+    .site-branding__name {
+      font-size: .75rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      line-height: 1.35;
+      max-width: 160px;
+    }
+
+    /* ── HERO BAND ── */
+    .hero-band {
+      background: var(--dark-blue);
+      color: var(--white);
+      text-align: center;
+      padding: 1.5rem 1.5rem 1.25rem;
+    }
+
+    .hero-band h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
       line-height: 1.2;
     }
 
-    header div p {
-      font-size: 0.75rem;
-      opacity: 0.7;
-      margin-top: 0.2rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .hero-band {
-      background: var(--wave);
-      color: white;
-      text-align: center;
-      padding: 1.25rem 1.5rem;
-    }
-
-    .hero-band h2 {
-      font-family: 'Source Serif 4', serif;
-      font-size: 1.4rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-    }
-
     .hero-band p {
-      font-size: 0.8rem;
-      opacity: 0.85;
-      margin-top: 0.3rem;
+      margin-top: .4rem;
+      font-size: .8rem;
+      font-weight: 300;
+      opacity: .85;
     }
 
+    /* ── FORM LAYOUT ── */
     form {
-      max-width: 680px;
+      max-width: 700px;
       margin: 0 auto;
-      padding: 2rem 1.25rem 4rem;
+      padding: 1.75rem 1.25rem 4rem;
     }
 
-    .section-block {
-      background: white;
+    /* ── SECTION BLOCKS ── */
+    .block {
+      background: var(--white);
       border-radius: var(--radius);
       padding: 1.5rem;
-      margin-bottom: 1.25rem;
-      border-top: 3px solid var(--ocean-light);
-    }
-
-    .section-block.accent {
-      border-top-color: var(--wave);
-    }
-
-    .section-title {
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--wave);
       margin-bottom: 1rem;
+      box-shadow: 0 3px 8px rgba(27,24,24,.06);
     }
 
-    .field-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
-      margin-bottom: 0.75rem;
+    .block-label {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--blue);
+      padding-bottom: .4rem;
     }
 
-    .field-row.single { grid-template-columns: 1fr; }
-    .field-row.triple { grid-template-columns: 1fr 1fr 2fr; }
+    /* ── FIELD GRIDS ── */
+    .row { display: grid; gap: .7rem; margin-bottom: .7rem; }
+    .row-2  { grid-template-columns: 1fr 1fr; }
+    .row-3  { grid-template-columns: 1fr 1fr 1.5fr; }
+    .row-1  { grid-template-columns: 1fr; }
 
     @media (max-width: 520px) {
-      .field-row, .field-row.triple { grid-template-columns: 1fr; }
+      .row-2, .row-3 { grid-template-columns: 1fr; }
     }
 
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-    }
+    .field { display: flex; flex-direction: column; gap: .3rem; }
 
     label {
-      font-size: 0.75rem;
+      font-size: .7rem;
       font-weight: 500;
       color: var(--muted);
-      letter-spacing: 0.02em;
+      letter-spacing: .03em;
     }
 
     input[type="text"],
@@ -133,766 +137,520 @@
     input[type="tel"],
     input[type="date"] {
       width: 100%;
-      padding: 0.6rem 0.75rem;
-      border: 1.5px solid var(--rule);
-      border-radius: 6px;
-      font-size: 0.9rem;
-      font-family: 'Inter', sans-serif;
-      color: var(--text);
-      background: white;
-      transition: border-color 0.15s;
+      padding: .65rem .9rem;
+      border: 1px solid var(--gray-mid);
+      border-radius: var(--radius);
+      font-family: var(--font);
+      font-size: .875rem;
+      color: var(--black);
+      background: var(--white);
+      transition: border-color .15s, box-shadow .15s;
       -webkit-appearance: none;
     }
 
     input:focus {
       outline: none;
-      border-color: var(--wave);
-      box-shadow: 0 0 0 3px rgba(46,125,181,0.1);
+      border-color: transparent;
+      box-shadow: 0 0 0 3px rgba(34,178,195,.2);
     }
 
-    input.error { border-color: var(--error); }
+    input.err { box-shadow: 0 0 0 2px var(--error); }
+
+    /* ── ACTIVITÉS ── */
+    .dates-info {
+      background: var(--gray);
+      border-radius: var(--radius);
+      padding: .65rem 1rem;
+      font-size: .8rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .dates-info strong { color: var(--black); font-weight: 600; }
 
     .activites-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 0.5rem;
-      margin-top: 0.25rem;
+      gap: .5rem;
     }
+    @media (max-width: 400px) { .activites-grid { grid-template-columns: 1fr; } }
 
-    @media (max-width: 400px) {
-      .activites-grid { grid-template-columns: 1fr; }
-    }
-
-    .activite-option {
+    .act-option {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
-      padding: 0.7rem 0.9rem;
-      border: 1.5px solid var(--rule);
-      border-radius: 6px;
+      gap: .6rem;
+      padding: .65rem .9rem;
+      border: 1.5px solid var(--gray-mid);
+      border-radius: var(--radius);
       cursor: pointer;
-      transition: all 0.15s;
-      font-size: 0.85rem;
-      color: var(--text);
+      font-size: .82rem;
+      color: var(--black);
+      transition: border-color .15s, background .15s;
       user-select: none;
+      line-height: 1.3;
     }
-
-    .activite-option:has(input:checked) {
-      border-color: var(--wave);
-      background: var(--ocean-light);
-      color: var(--ocean);
+    .act-option:has(input:checked) {
+      border-color: var(--blue);
+      background: #e8f8fa;
+      color: var(--dark-blue);
+      font-weight: 600;
     }
-
-    .activite-option input[type="checkbox"] {
-      width: 16px;
-      height: 16px;
-      accent-color: var(--wave);
+    .act-option input[type="checkbox"] {
+      width: 15px; height: 15px;
+      accent-color: var(--blue);
       flex-shrink: 0;
     }
+    .act-full { grid-column: 1 / -1; }
 
-    .tarifs-info {
-      background: var(--ocean-light);
-      border-radius: 6px;
-      padding: 0.9rem 1rem;
-      font-size: 0.85rem;
-      line-height: 1.6;
-      color: var(--ocean);
+    .tarifs-block {
       margin-top: 1rem;
+      background: var(--gray);
+      border-radius: var(--radius);
+      padding: .8rem 1rem;
+      font-size: .82rem;
+      line-height: 1.7;
+      color: var(--muted);
     }
+    .tarifs-block strong { color: var(--black); font-weight: 700; display: block; margin-bottom: .1rem; }
 
-    .tarifs-info strong { display: block; font-weight: 600; margin-bottom: 0.2rem; }
+    /* ── CLAUSES ── */
+    .clauses { list-style: none; display: flex; flex-direction: column; gap: .55rem; }
 
-    /* Clauses */
-    .clauses-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-
-    .clause-item {
+    .clause {
       display: flex;
       align-items: flex-start;
-      gap: 0.7rem;
-      font-size: 0.82rem;
+      gap: .65rem;
+      font-size: .78rem;
       line-height: 1.55;
       color: var(--muted);
     }
-
-    .clause-item input[type="checkbox"] {
-      width: 17px;
-      height: 17px;
+    .clause input[type="checkbox"] {
+      width: 16px; height: 16px;
       flex-shrink: 0;
-      margin-top: 0.1rem;
-      accent-color: var(--wave);
+      margin-top: .15rem;
+      accent-color: var(--black);
       cursor: pointer;
     }
+    .clause label { font-weight: 400; cursor: pointer; color: var(--muted); }
+    .clause a { color: var(--blue); text-decoration: underline; }
 
-    .clause-item label { font-weight: 400; cursor: pointer; }
+    .sep { height: 1px; background: var(--gray-mid); margin: 1rem 0; }
 
-    /* Signature */
-    .signature-zone {
-      margin-top: 0.5rem;
-    }
+    .radio-row { display: flex; align-items: center; gap: 1.5rem; font-size: .82rem; }
+    .radio-opt { display: flex; align-items: center; gap: .4rem; cursor: pointer; font-weight: 500; }
+    .radio-opt input { accent-color: var(--blue); cursor: pointer; }
 
-    .sig-header {
+    /* ── SIGNATURE ── */
+    .sig-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 0.5rem;
+      margin-bottom: .45rem;
     }
-
-    .sig-label { font-size: 0.75rem; font-weight: 500; color: var(--muted); }
-
+    .sig-bar span { font-size: .7rem; font-weight: 500; color: var(--muted); }
     #clearSig {
-      font-size: 0.75rem;
-      color: var(--wave);
+      font-size: .72rem;
+      color: var(--blue);
       background: none;
       border: none;
       cursor: pointer;
-      padding: 0.2rem 0.4rem;
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font);
       text-decoration: underline;
     }
 
     #signatureCanvas {
       width: 100%;
-      height: 150px;
-      border: 1.5px solid var(--rule);
-      border-radius: 6px;
-      background: #fafcfe;
+      height: 145px;
+      border: 1.5px solid var(--gray-mid);
+      border-radius: var(--radius);
+      background: #f8fbfc;
       touch-action: none;
       display: block;
       cursor: crosshair;
     }
-
-    #signatureCanvas.signed {
-      border-color: var(--seafoam);
-    }
-
-    #signatureCanvas.error-canvas {
-      border-color: var(--error);
-    }
+    #signatureCanvas.signed    { border-color: var(--blue); }
+    #signatureCanvas.err-canvas{ box-shadow: 0 0 0 2px var(--error); }
 
     .sig-hint {
-      font-size: 0.72rem;
-      color: var(--muted);
-      margin-top: 0.4rem;
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
+      font-size: .7rem;
+      color: var(--gray-mute);
+      margin-top: .35rem;
     }
 
-    .date-lieu-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
-      margin-top: 1rem;
+    .date-lieu { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem; margin-top: 1rem; }
+    @media (max-width: 400px) { .date-lieu { grid-template-columns: 1fr; } }
+
+    /* ── MINOR NOTE ── */
+    .minor-note {
+      font-size: .72rem;
+      color: var(--gray-mute);
+      font-style: italic;
+      margin-bottom: .7rem;
     }
 
-    @media (max-width: 400px) {
-      .date-lieu-row { grid-template-columns: 1fr; }
-    }
-
-    /* Modalités lien */
-    .modalites-link {
-      display: inline;
-      color: var(--wave);
-      text-decoration: underline;
-    }
-
-    /* Erreur globale */
+    /* ── ERROR BOX ── */
     .form-error {
+      display: none;
       background: #fdecea;
       border: 1px solid #e8c4c0;
-      border-radius: 6px;
-      padding: 0.75rem 1rem;
-      font-size: 0.82rem;
-      color: var(--error);
+      border-radius: var(--radius);
+      padding: .7rem 1rem;
+      font-size: .8rem;
+      color: #c0392b;
       margin-bottom: 1rem;
-      display: none;
     }
+    .form-error.show { display: block; }
 
-    .form-error.visible { display: block; }
-
-    /* Bouton submit */
+    /* ── SUBMIT ── */
     #submitBtn {
       width: 100%;
       padding: 1rem;
-      background: var(--ocean);
-      color: white;
+      background: var(--black);
+      color: var(--white);
       border: none;
       border-radius: var(--radius);
+      font-family: var(--font);
       font-size: 1rem;
-      font-weight: 600;
-      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: .05em;
       cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
-      margin-top: 0.5rem;
-      letter-spacing: 0.01em;
+      transition: background .2s;
+      margin-top: .25rem;
     }
-
-    #submitBtn:hover { background: var(--ocean-mid); }
-    #submitBtn:active { transform: scale(0.99); }
-    #submitBtn:disabled { background: var(--muted); cursor: not-allowed; }
+    #submitBtn:hover  { background: var(--blue); }
+    #submitBtn:active { transform: scale(.99); }
+    #submitBtn:disabled { background: var(--gray-mute); cursor: not-allowed; }
 
     .submit-note {
       text-align: center;
-      font-size: 0.75rem;
+      font-size: .72rem;
       color: var(--muted);
-      margin-top: 0.75rem;
+      margin-top: .75rem;
       line-height: 1.5;
     }
 
-    /* Dates séances */
-    .dates-band {
-      background: var(--ocean-light);
-      border-radius: 6px;
-      padding: 0.7rem 1rem;
-      font-size: 0.82rem;
-      color: var(--ocean);
-      margin-bottom: 1rem;
-      line-height: 1.6;
-    }
-    .dates-band strong { font-weight: 600; }
-
-    /* Toast */
+    /* ── TOAST ── */
     #toast {
       position: fixed;
       bottom: 1.5rem;
       left: 50%;
-      transform: translateX(-50%) translateY(100px);
-      background: var(--ocean);
-      color: white;
-      padding: 0.9rem 1.5rem;
-      border-radius: 8px;
-      font-size: 0.875rem;
+      transform: translateX(-50%) translateY(120px);
+      background: var(--dark-blue);
+      color: var(--white);
+      padding: .85rem 1.5rem;
+      border-radius: var(--radius);
+      font-size: .875rem;
       font-weight: 500;
-      transition: transform 0.3s ease;
+      transition: transform .3s ease;
       z-index: 1000;
       text-align: center;
       max-width: 90vw;
+      box-shadow: 0 10px 20px rgba(27,24,24,.2);
     }
-    #toast.visible { transform: translateX(-50%) translateY(0); }
-
-    /* Séparateur */
-    .sep {
-      height: 1px;
-      background: var(--rule);
-      margin: 1rem 0;
-    }
-
-    .minor-note {
-      font-size: 0.75rem;
-      color: var(--muted);
-      font-style: italic;
-      margin-bottom: 0.75rem;
-    }
-
-    .rentrer-row {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      margin-top: 0.5rem;
-      font-size: 0.85rem;
-      color: var(--text);
-    }
-
-    .radio-option {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      cursor: pointer;
-    }
-
-    .radio-option input { accent-color: var(--wave); cursor: pointer; }
+    #toast.show { transform: translateX(-50%) translateY(0); }
   </style>
 </head>
 <body>
 
-<header>
-  <div>
-    <h1>Centre Nautique et de Plein Air de Lesconil</h1>
-    <p>Plobannalec-Lesconil · Pays Bigouden</p>
+<header class="site-header">
+  <div class="site-branding">
+    <img class="site-branding__logo"
+         src="https://centrenautiquelesconil.com/wp-content/uploads/2022/01/CNPA%E2%80%94logo-vertical-footer.png.webp"
+         alt="Logo CNPA"
+         onerror="this.style.display='none'">
+    <span class="site-branding__name">Centre Nautique<br>et de Plein Air<br>de Lesconil</span>
   </div>
 </header>
 
 <div class="hero-band">
-  <h2>Fiche d'inscription — Loisir Automne 2026</h2>
+  <h1>Fiche d'inscription — Loisir Automne 2026</h1>
   <p>Samedis de 14h à 17h · Septembre, Octobre &amp; Novembre 2026</p>
 </div>
 
 <form id="inscriptionForm" novalidate>
 
   <!-- STAGIAIRE -->
-  <div class="section-block accent">
-    <p class="section-title">Stagiaire</p>
-
-    <div class="field-row">
-      <div class="field">
-        <label for="nom">Nom *</label>
-        <input type="text" id="nom" name="nom" required autocomplete="family-name">
-      </div>
-      <div class="field">
-        <label for="prenom">Prénom *</label>
-        <input type="text" id="prenom" name="prenom" required autocomplete="given-name">
-      </div>
+  <div class="block">
+    <p class="block-label">Stagiaire</p>
+    <div class="row row-2">
+      <div class="field"><label for="nom">Nom *</label>
+        <input type="text" id="nom" required autocomplete="family-name"></div>
+      <div class="field"><label for="prenom">Prénom *</label>
+        <input type="text" id="prenom" required autocomplete="given-name"></div>
     </div>
-
-    <div class="field-row triple">
-      <div class="field">
-        <label for="dateNaissance">Date de naissance *</label>
-        <input type="date" id="dateNaissance" name="dateNaissance" required>
-      </div>
-      <div class="field">
-        <label for="tel">Téléphone *</label>
-        <input type="tel" id="tel" name="tel" required autocomplete="tel">
-      </div>
-      <div class="field">
-        <label for="email">E-mail *</label>
-        <input type="email" id="email" name="email" required autocomplete="email">
-      </div>
+    <div class="row row-3">
+      <div class="field"><label for="dateNaissance">Date de naissance *</label>
+        <input type="date" id="dateNaissance" required></div>
+      <div class="field"><label for="tel">Téléphone *</label>
+        <input type="tel" id="tel" required autocomplete="tel"></div>
+      <div class="field"><label for="email">E-mail *</label>
+        <input type="email" id="email" required autocomplete="email"></div>
     </div>
-
-    <div class="field-row single">
-      <div class="field">
-        <label for="adresse">Adresse principale *</label>
-        <input type="text" id="adresse" name="adresse" required autocomplete="street-address">
-      </div>
+    <div class="row row-1">
+      <div class="field"><label for="adresse">Adresse principale *</label>
+        <input type="text" id="adresse" required autocomplete="street-address"></div>
     </div>
-
-    <div class="field-row">
-      <div class="field">
-        <label for="codePostal">Code postal *</label>
-        <input type="text" id="codePostal" name="codePostal" required autocomplete="postal-code" inputmode="numeric" maxlength="5">
-      </div>
-      <div class="field">
-        <label for="ville">Ville *</label>
-        <input type="text" id="ville" name="ville" required autocomplete="address-level2">
-      </div>
+    <div class="row row-2">
+      <div class="field"><label for="cp">Code postal *</label>
+        <input type="text" id="cp" required inputmode="numeric" maxlength="5" autocomplete="postal-code"></div>
+      <div class="field"><label for="ville">Ville *</label>
+        <input type="text" id="ville" required autocomplete="address-level2"></div>
     </div>
-
-    <div class="field-row single">
-      <div class="field">
-        <label for="urgence">Personne à prévenir en cas d'urgence (nom et téléphone) *</label>
-        <input type="text" id="urgence" name="urgence" required placeholder="Ex. : Marie Dupont – 06 XX XX XX XX">
-      </div>
+    <div class="row row-1">
+      <div class="field"><label for="urgence">Personne à prévenir en cas d'urgence (nom + téléphone) *</label>
+        <input type="text" id="urgence" required placeholder="Ex. : Marie Dupont – 06 XX XX XX XX"></div>
     </div>
   </div>
 
-  <!-- PERSONNE SIGNATAIRE (mineurs) -->
-  <div class="section-block">
-    <p class="section-title">Personne signataire — pour les stagiaires mineurs</p>
-    <p class="minor-note">À compléter uniquement si le stagiaire est mineur.</p>
-
-    <div class="field-row">
-      <div class="field">
-        <label for="sigNom">Nom</label>
-        <input type="text" id="sigNom" name="sigNom" autocomplete="family-name">
-      </div>
-      <div class="field">
-        <label for="sigPrenom">Prénom</label>
-        <input type="text" id="sigPrenom" name="sigPrenom" autocomplete="given-name">
-      </div>
+  <!-- SIGNATAIRE MINEUR -->
+  <div class="block">
+    <p class="block-label">Personne signataire — mineurs uniquement</p>
+    <p class="minor-note">À remplir uniquement si le stagiaire est mineur.</p>
+    <div class="row row-2">
+      <div class="field"><label for="sigNom">Nom</label>
+        <input type="text" id="sigNom" autocomplete="family-name"></div>
+      <div class="field"><label for="sigPrenom">Prénom</label>
+        <input type="text" id="sigPrenom" autocomplete="given-name"></div>
     </div>
-
-    <div class="field-row triple">
-      <div class="field">
-        <label for="sigDateNaissance">Date de naissance</label>
-        <input type="date" id="sigDateNaissance" name="sigDateNaissance">
-      </div>
-      <div class="field">
-        <label for="sigTel">Téléphone</label>
-        <input type="tel" id="sigTel" name="sigTel">
-      </div>
-      <div class="field">
-        <label for="sigEmail">E-mail</label>
-        <input type="email" id="sigEmail" name="sigEmail">
-      </div>
+    <div class="row row-3">
+      <div class="field"><label for="sigDdn">Date de naissance</label>
+        <input type="date" id="sigDdn"></div>
+      <div class="field"><label for="sigTel">Téléphone</label>
+        <input type="tel" id="sigTel"></div>
+      <div class="field"><label for="sigEmail">E-mail</label>
+        <input type="email" id="sigEmail"></div>
     </div>
-
-    <div class="field-row single">
-      <div class="field">
-        <label for="sigAdresse">Adresse principale</label>
-        <input type="text" id="sigAdresse" name="sigAdresse" autocomplete="street-address">
-      </div>
+    <div class="row row-1">
+      <div class="field"><label for="sigAdresse">Adresse principale</label>
+        <input type="text" id="sigAdresse" autocomplete="street-address"></div>
     </div>
-
-    <div class="field-row">
-      <div class="field">
-        <label for="sigCp">Code postal</label>
-        <input type="text" id="sigCp" name="sigCp" autocomplete="postal-code" inputmode="numeric" maxlength="5">
-      </div>
-      <div class="field">
-        <label for="sigVille">Ville</label>
-        <input type="text" id="sigVille" name="sigVille">
-      </div>
+    <div class="row row-2">
+      <div class="field"><label for="sigCp">Code postal</label>
+        <input type="text" id="sigCp" inputmode="numeric" maxlength="5"></div>
+      <div class="field"><label for="sigVille">Ville</label>
+        <input type="text" id="sigVille"></div>
     </div>
   </div>
 
   <!-- ACTIVITÉ -->
-  <div class="section-block accent">
-    <p class="section-title">Activité choisie</p>
-
-    <div class="dates-band">
+  <div class="block">
+    <p class="block-label">Activité choisie</p>
+    <div class="dates-info">
       <strong>Dates des séances :</strong>
-      12, 19, 26 septembre · 3, 10, 17 octobre · 7, 14, 21 novembre
+      12, 19, 26 septembre · 3, 10, 17 octobre · 7, 14, 21 novembre 2026
     </div>
-
-    <p style="font-size:0.78rem;color:var(--muted);margin-bottom:0.6rem;">Sélectionnez une activité *</p>
-    <div class="activites-grid" id="activitesGrid">
-      <label class="activite-option">
-        <input type="checkbox" name="activite" value="multi_activite"> Multi-activité (8–10 ans)
-      </label>
-      <label class="activite-option">
-        <input type="checkbox" name="activite" value="planche_voile"> Planche à voile (dès 11 ans)
-      </label>
-      <label class="activite-option">
-        <input type="checkbox" name="activite" value="catamaran_ado"> Catamaran (11–14 ans)
-      </label>
-      <label class="activite-option">
-        <input type="checkbox" name="activite" value="catamaran_adulte"> Catamaran adulte (15 ans et +)
-      </label>
-      <label class="activite-option" style="grid-column: 1 / -1;">
-        <input type="checkbox" name="activite" value="kayak_adulte"> Kayak de mer adulte
-      </label>
+    <p style="font-size:.72rem;color:var(--muted);margin-bottom:.5rem;">Sélectionnez une activité *</p>
+    <div class="activites-grid">
+      <label class="act-option"><input type="checkbox" name="activite" value="multi_activite"> Multi-activité (8–10 ans)</label>
+      <label class="act-option"><input type="checkbox" name="activite" value="planche_voile"> Planche à voile (dès 11 ans)</label>
+      <label class="act-option"><input type="checkbox" name="activite" value="catamaran_ado"> Catamaran (11–14 ans)</label>
+      <label class="act-option"><input type="checkbox" name="activite" value="catamaran_adulte"> Catamaran adulte (15 ans et +)</label>
+      <label class="act-option act-full"><input type="checkbox" name="activite" value="kayak_adulte"> Kayak de mer adulte</label>
     </div>
-
-    <div class="tarifs-info">
+    <div class="tarifs-block">
       <strong>Tarifs saison 2026</strong>
       Plein tarif : 126 € + 8 € d'adhésion au CNPA<br>
-      Résident à l'année (carte d'électeur) : 63 € + 8 € d'adhésion au CNPA<br>
-      <span style="font-size:0.78rem;opacity:0.85;">Règlement à effectuer avant le début de la saison.</span>
+      Résident à l'année (carte d'électeur) : 63 € + 8 € d'adhésion<br>
+      <span style="font-size:.75em">Règlement à effectuer avant le début de la saison.</span>
     </div>
   </div>
 
-  <!-- CLAUSES & AUTORISATIONS -->
-  <div class="section-block">
-    <p class="section-title">Déclarations et autorisations</p>
-    <p style="font-size:0.8rem;color:var(--muted);margin-bottom:1rem;">
-      La personne signataire (ou le stagiaire majeur) déclare et autorise ce qui suit. Toutes les cases sont obligatoires.
-      <a href="modalites.html" target="_blank" class="modalites-link">Lire les modalités complètes d'inscription.</a>
+  <!-- CLAUSES -->
+  <div class="block">
+    <p class="block-label">Déclarations et autorisations</p>
+    <p style="font-size:.78rem;color:var(--muted);margin-bottom:.9rem;">
+      La personne signataire (ou le stagiaire majeur) coche chaque engagement. Toutes les cases sont obligatoires. 
+      <a href="modalites.html" target="_blank" style="color:var(--blue);text-decoration:underline;">Lire les modalités complètes.</a>
     </p>
-
-    <ul class="clauses-list">
-      <li class="clause-item">
-        <input type="checkbox" id="c1" name="c1" required>
-        <label for="c1">Autorise le stagiaire mineur à pratiquer les activités nautiques du CNPA.</label>
-      </li>
-      <li class="clause-item">
-        <input type="checkbox" id="c2" name="c2" required>
-        <label for="c2">Déclare avoir été informé(e) sur les capacités requises pour la pratique des activités du CNPA.</label>
-      </li>
-      <li class="clause-item">
-        <input type="checkbox" id="c3" name="c3" required>
-        <label for="c3">Atteste que le stagiaire (16 ans et + : apte à plonger et nager 50 m ; moins de 16 ans : apte à s'immerger et nager 25 m) ne présente aucune contre-indication à la pratique des sports nautiques, et s'engage à déclarer tout traitement.</label>
-      </li>
-      <li class="clause-item">
-        <input type="checkbox" id="c4" name="c4" required>
-        <label for="c4">Autorise le CNPA, en cas d'urgence, à conduire le stagiaire dans un établissement hospitalier où toute intervention médicale ou chirurgicale pourra être pratiquée.</label>
-      </li>
-      <li class="clause-item">
-        <input type="checkbox" id="c5" name="c5" required>
-        <label for="c5">Autorise le CNPA à utiliser librement les images et vidéos prises lors du stage pour la promotion des activités nautiques.</label>
-      </li>
-      <li class="clause-item">
-        <input type="checkbox" id="c6" name="c6" required>
-        <label for="c6">Déclare avoir pris connaissance et accepté les <a href="modalites.html" target="_blank" class="modalites-link">modalités d'inscription</a>.</label>
-      </li>
+    <ul class="clauses">
+      <li class="clause"><input type="checkbox" id="c1"><label for="c1">Autorise le stagiaire mineur à pratiquer les activités nautiques du CNPA.</label></li>
+      <li class="clause"><input type="checkbox" id="c2"><label for="c2">Déclare avoir été informé(e) sur les capacités requises pour la pratique des activités du CNPA.</label></li>
+      <li class="clause"><input type="checkbox" id="c3"><label for="c3">Atteste que le stagiaire est apte aux activités nautiques (16 ans et + : nage 50 m ; moins de 16 ans : nage 25 m) et ne présente aucune contre-indication, et s'engage à déclarer tout traitement.</label></li>
+      <li class="clause"><input type="checkbox" id="c4"><label for="c4">Autorise le CNPA à conduire le stagiaire dans un établissement hospitalier en cas d'urgence médicale ou chirurgicale.</label></li>
+      <li class="clause"><input type="checkbox" id="c5"><label for="c5">Autorise le CNPA à utiliser librement les images et vidéos prises lors du stage pour la promotion des activités nautiques.</label></li>
+      <li class="clause"><input type="checkbox" id="c6"><label for="c6">Déclare avoir pris connaissance et accepté les <a href="modalites.html" target="_blank">modalités d'inscription</a>.</label></li>
     </ul>
-
     <div class="sep"></div>
-
-    <p style="font-size:0.82rem;color:var(--text);font-weight:500;margin-bottom:0.5rem;">Autorisation de rentrer seul après la séance *</p>
-    <div class="rentrer-row">
-      <label class="radio-option">
-        <input type="radio" name="rentrerSeul" value="oui"> Oui
-      </label>
-      <label class="radio-option">
-        <input type="radio" name="rentrerSeul" value="non"> Non
-      </label>
+    <p style="font-size:.8rem;font-weight:600;margin-bottom:.45rem;">Autorisation de rentrer seul après la séance *</p>
+    <div class="radio-row">
+      <label class="radio-opt"><input type="radio" name="rentrerSeul" value="oui"> Oui</label>
+      <label class="radio-opt"><input type="radio" name="rentrerSeul" value="non"> Non</label>
     </div>
   </div>
 
   <!-- SIGNATURE -->
-  <div class="section-block accent">
-    <p class="section-title">Signature</p>
-    <p style="font-size:0.8rem;color:var(--muted);margin-bottom:1rem;">Signez dans la zone ci-dessous (doigt ou stylet). Pour les mineurs, cette signature vaut autorisation parentale.</p>
-
-    <div class="signature-zone">
-      <div class="sig-header">
-        <span class="sig-label">Zone de signature *</span>
-        <button type="button" id="clearSig">Effacer</button>
-      </div>
-      <canvas id="signatureCanvas"></canvas>
-      <p class="sig-hint">✏️ Tracez votre signature ci-dessus</p>
+  <div class="block">
+    <p class="block-label">Signature</p>
+    <p style="font-size:.78rem;color:var(--muted);margin-bottom:.9rem;">
+      Signez dans la zone ci-dessous (doigt ou stylet). Pour les mineurs, cette signature vaut autorisation parentale — mention « lu et approuvé ».
+    </p>
+    <div class="sig-bar">
+      <span>Zone de signature *</span>
+      <button type="button" id="clearSig">Effacer</button>
     </div>
-
-    <div class="date-lieu-row">
-      <div class="field">
-        <label for="lieuSig">Fait à *</label>
-        <input type="text" id="lieuSig" name="lieuSig" required placeholder="Ex. : Lesconil">
-      </div>
-      <div class="field">
-        <label for="dateSig">Le *</label>
-        <input type="date" id="dateSig" name="dateSig" required>
-      </div>
+    <canvas id="signatureCanvas"></canvas>
+    <p class="sig-hint" id="sigHint">✏️ Tracez votre signature ci-dessus</p>
+    <div class="date-lieu">
+      <div class="field"><label for="lieuSig">Fait à *</label>
+        <input type="text" id="lieuSig" required placeholder="Ex. : Lesconil"></div>
+      <div class="field"><label for="dateSig">Le *</label>
+        <input type="date" id="dateSig" required></div>
     </div>
   </div>
 
   <div class="form-error" id="formError">
-    Veuillez compléter tous les champs obligatoires, signer le formulaire et cocher toutes les clauses.
+    Merci de compléter tous les champs obligatoires (*), signer le formulaire et cocher toutes les clauses.
   </div>
 
-  <button type="submit" id="submitBtn">Générer et envoyer ma fiche d'inscription →</button>
-  <p class="submit-note">Un PDF sera généré et votre client de messagerie s'ouvrira pour l'envoyer au CNPA.<br>Adresse : <strong>contact@centrenautiquelesconil.com</strong></p>
+  <button type="submit" id="submitBtn">Générer et envoyer ma fiche d'inscription</button>
+  <p class="submit-note">
+    Un PDF sera téléchargé · Votre client mail s'ouvrira avec l'adresse du CNPA pré-remplie.<br>
+    <strong>contact@centrenautiquelesconil.com</strong>
+  </p>
 
 </form>
 
-<div id="toast">PDF généré · Votre client mail va s'ouvrir.</div>
+<div id="toast">✓ PDF généré · Votre client mail va s'ouvrir.</div>
 
 <script>
-(function() {
-  // === CANVAS SIGNATURE ===
+(function () {
+
+  // ── CANVAS ──
   const canvas = document.getElementById('signatureCanvas');
   const ctx = canvas.getContext('2d');
-  let drawing = false;
-  let hasSigned = false;
+  let drawing = false, hasSigned = false;
 
   function resizeCanvas() {
     const rect = canvas.getBoundingClientRect();
     const ratio = window.devicePixelRatio || 1;
-    const oldData = hasSigned ? canvas.toDataURL() : null;
-    canvas.width = rect.width * ratio;
+    const prev = hasSigned ? canvas.toDataURL() : null;
+    canvas.width  = rect.width  * ratio;
     canvas.height = rect.height * ratio;
     ctx.scale(ratio, ratio);
-    ctx.strokeStyle = '#1a4a6e';
-    ctx.lineWidth = 2;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-    if (oldData && hasSigned) {
-      const img = new Image();
-      img.onload = () => ctx.drawImage(img, 0, 0, rect.width, rect.height);
-      img.src = oldData;
-    }
+    ctx.strokeStyle = '#221f20';
+    ctx.lineWidth   = 2;
+    ctx.lineCap     = 'round';
+    ctx.lineJoin    = 'round';
+    if (prev) { const img = new Image(); img.onload = () => ctx.drawImage(img, 0, 0, rect.width, rect.height); img.src = prev; }
   }
-
   resizeCanvas();
   window.addEventListener('resize', resizeCanvas);
 
-  function getPos(e) {
-    const rect = canvas.getBoundingClientRect();
-    if (e.touches) {
-      return {
-        x: e.touches[0].clientX - rect.left,
-        y: e.touches[0].clientY - rect.top
-      };
-    }
-    return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+  function pos(e) {
+    const r = canvas.getBoundingClientRect();
+    return e.touches
+      ? { x: e.touches[0].clientX - r.left, y: e.touches[0].clientY - r.top }
+      : { x: e.clientX - r.left, y: e.clientY - r.top };
   }
 
-  function startDraw(e) {
-    e.preventDefault();
-    drawing = true;
-    const pos = getPos(e);
-    ctx.beginPath();
-    ctx.moveTo(pos.x, pos.y);
-  }
+  canvas.addEventListener('mousedown',  e => { e.preventDefault(); drawing = true; const p = pos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); });
+  canvas.addEventListener('mousemove',  e => { if (!drawing) return; const p = pos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); markSigned(); });
+  canvas.addEventListener('mouseup',    () => drawing = false);
+  canvas.addEventListener('mouseleave', () => drawing = false);
+  canvas.addEventListener('touchstart', e => { e.preventDefault(); drawing = true; const p = pos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); }, { passive: false });
+  canvas.addEventListener('touchmove',  e => { if (!drawing) return; e.preventDefault(); const p = pos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); markSigned(); }, { passive: false });
+  canvas.addEventListener('touchend',   () => drawing = false);
 
-  function draw(e) {
-    if (!drawing) return;
-    e.preventDefault();
-    const pos = getPos(e);
-    ctx.lineTo(pos.x, pos.y);
-    ctx.stroke();
+  function markSigned() {
     hasSigned = true;
-    canvas.classList.add('signed');
-    canvas.classList.remove('error-canvas');
-    document.querySelector('.sig-hint').textContent = '✔ Signature enregistrée';
+    canvas.classList.add('signed'); canvas.classList.remove('err-canvas');
+    document.getElementById('sigHint').textContent = '✔ Signature enregistrée';
   }
-
-  function stopDraw() { drawing = false; }
-
-  canvas.addEventListener('mousedown', startDraw);
-  canvas.addEventListener('mousemove', draw);
-  canvas.addEventListener('mouseup', stopDraw);
-  canvas.addEventListener('mouseleave', stopDraw);
-  canvas.addEventListener('touchstart', startDraw, { passive: false });
-  canvas.addEventListener('touchmove', draw, { passive: false });
-  canvas.addEventListener('touchend', stopDraw);
 
   document.getElementById('clearSig').addEventListener('click', () => {
-    const rect = canvas.getBoundingClientRect();
-    ctx.clearRect(0, 0, rect.width, rect.height);
-    hasSigned = false;
-    canvas.classList.remove('signed', 'error-canvas');
-    document.querySelector('.sig-hint').textContent = '✏️ Tracez votre signature ci-dessus';
+    const r = canvas.getBoundingClientRect(); ctx.clearRect(0, 0, r.width, r.height);
+    hasSigned = false; canvas.classList.remove('signed', 'err-canvas');
+    document.getElementById('sigHint').textContent = '✏️ Tracez votre signature ci-dessus';
   });
 
-  // === ACTIVITÉS — une seule sélection ===
-  const checkboxes = document.querySelectorAll('input[name="activite"]');
-  checkboxes.forEach(cb => {
-    cb.addEventListener('change', () => {
-      if (cb.checked) {
-        checkboxes.forEach(o => { if (o !== cb) o.checked = false; });
-      }
-    });
-  });
+  // ── ACTIVITÉS : une seule sélection ──
+  const cbs = document.querySelectorAll('input[name="activite"]');
+  cbs.forEach(cb => cb.addEventListener('change', () => { if (cb.checked) cbs.forEach(o => { if (o !== cb) o.checked = false; }); }));
 
-  // Date du jour par défaut
-  const today = new Date().toISOString().split('T')[0];
-  document.getElementById('dateSig').value = today;
+  // Date du jour
+  document.getElementById('dateSig').value = new Date().toISOString().split('T')[0];
 
-  // === VALIDATION ===
+  // ── HELPERS ──
+  function v(id) { return (document.getElementById(id)?.value || '').trim(); }
   function getActivite() {
-    const checked = document.querySelector('input[name="activite"]:checked');
-    if (!checked) return '';
-    const labels = {
-      'multi_activite': 'Multi-activité (8–10 ans)',
-      'planche_voile': 'Planche à voile (à partir de 11 ans)',
-      'catamaran_ado': 'Catamaran (11–14 ans)',
-      'catamaran_adulte': 'Catamaran adulte (15 ans et +)',
-      'kayak_adulte': 'Kayak de mer adulte'
-    };
-    return labels[checked.value] || checked.value;
+    const map = { multi_activite:'Multi-activité (8–10 ans)', planche_voile:'Planche à voile (à partir de 11 ans)', catamaran_ado:'Catamaran (11–14 ans)', catamaran_adulte:'Catamaran adulte (15 ans et +)', kayak_adulte:'Kayak de mer adulte' };
+    const ch = document.querySelector('input[name="activite"]:checked');
+    return ch ? (map[ch.value] || ch.value) : '';
   }
 
+  // ── VALIDATION ──
   function validate() {
     let ok = true;
-    const required = ['nom','prenom','dateNaissance','tel','email','adresse','codePostal','ville','urgence','lieuSig','dateSig'];
-    required.forEach(id => {
+    ['nom','prenom','dateNaissance','tel','email','adresse','cp','ville','urgence','lieuSig','dateSig'].forEach(id => {
       const el = document.getElementById(id);
-      if (!el.value.trim()) {
-        el.classList.add('error'); ok = false;
-      } else {
-        el.classList.remove('error');
-      }
+      if (!el.value.trim()) { el.classList.add('err'); ok = false; } else el.classList.remove('err');
     });
-    if (!getActivite()) { ok = false; }
-    const clauses = ['c1','c2','c3','c4','c5','c6'];
-    clauses.forEach(id => {
-      if (!document.getElementById(id).checked) ok = false;
-    });
+    if (!getActivite()) ok = false;
+    ['c1','c2','c3','c4','c5','c6'].forEach(id => { if (!document.getElementById(id).checked) ok = false; });
     if (!document.querySelector('input[name="rentrerSeul"]:checked')) ok = false;
-    if (!hasSigned) {
-      canvas.classList.add('error-canvas'); ok = false;
-    }
+    if (!hasSigned) { canvas.classList.add('err-canvas'); ok = false; }
     return ok;
   }
 
-  // === GÉNÉRATION PDF ===
+  // ── PDF ──
   function buildPDF() {
     const { jsPDF } = window.jspdf;
-    const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+    const doc = new jsPDF({ unit:'mm', format:'a4' });
+    const M = 18, W = 210, CW = W - M * 2;
+    const blue = [34, 178, 195], darkBlue = [19, 84, 96], black = [34, 31, 32], muted = [111, 112, 114], gray = [239,240,244];
+    let y = 0;
 
-    const margin = 18;
-    const pageW = 210;
-    const contentW = pageW - margin * 2;
-    let y = 18;
+    // ── Header
+    doc.setFillColor(...darkBlue); doc.rect(0,0,210,22,'F');
+    doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(10);
+    doc.text('CENTRE NAUTIQUE ET DE PLEIN AIR DE LESCONIL', M, 10);
+    doc.setFont('helvetica','normal'); doc.setFontSize(7);
+    doc.text('Plobannalec-Lesconil · Pays Bigouden', M, 16);
 
-    // Couleurs
-    const ocean = [26, 74, 110];
-    const wave = [46, 125, 181];
-    const muted = [90, 100, 112];
-    const light = [232, 242, 249];
-
-    // En-tête
-    doc.setFillColor(...ocean);
-    doc.rect(0, 0, 210, 22, 'F');
-    doc.setTextColor(255, 255, 255);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(11);
-    doc.text('CENTRE NAUTIQUE ET DE PLEIN AIR DE LESCONIL', margin, 10);
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(7.5);
-    doc.text('Plobannalec-Lesconil · Pays Bigouden', margin, 16);
-    y = 30;
-
-    // Titre fiche
-    doc.setFillColor(...wave);
-    doc.rect(0, 22, 210, 12, 'F');
-    doc.setTextColor(255, 255, 255);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(12);
-    doc.text('FICHE D\'INSCRIPTION — LOISIR AUTOMNE 2026', 105, 30, { align: 'center' });
-    y = 42;
+    // ── Title band
+    doc.setFillColor(...blue); doc.rect(0,22,210,11,'F');
+    doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(11);
+    doc.text("FICHE D'INSCRIPTION — LOISIR AUTOMNE 2026", 105, 29.5, { align:'center' });
+    y = 41;
 
     const section = (title) => {
-      doc.setFillColor(...light);
-      doc.rect(margin, y, contentW, 7, 'F');
-      doc.setDrawColor(...wave);
-      doc.setLineWidth(0.4);
-      doc.rect(margin, y, contentW, 7, 'S');
-      doc.setTextColor(...wave);
-      doc.setFont('helvetica', 'bold');
-      doc.setFontSize(7.5);
-      doc.text(title.toUpperCase(), margin + 3, y + 4.5);
-      y += 10;
+      doc.setFillColor(...gray); doc.rect(M, y, CW, 6.5, 'F');
+      doc.setDrawColor(...blue); doc.setLineWidth(.3); doc.rect(M, y, CW, 6.5, 'S');
+      doc.setTextColor(...blue); doc.setFont('helvetica','bold'); doc.setFontSize(7);
+      doc.text(title.toUpperCase(), M+3, y+4.5); y += 9;
     };
 
-    const field = (label, value, x, fw) => {
-      doc.setTextColor(...muted);
-      doc.setFont('helvetica', 'normal');
-      doc.setFontSize(7);
-      doc.text(label, x, y);
-      doc.setTextColor(20, 20, 20);
-      doc.setFont('helvetica', 'normal');
-      doc.setFontSize(9);
-      doc.text(value || '—', x, y + 4.5);
-      doc.setDrawColor(200, 210, 220);
-      doc.setLineWidth(0.3);
-      doc.line(x, y + 6, x + fw - 3, y + 6);
+    const field = (lbl, val, x, fw) => {
+      doc.setTextColor(...muted); doc.setFont('helvetica','normal'); doc.setFontSize(6.5);
+      doc.text(lbl, x, y);
+      doc.setTextColor(...black); doc.setFont('helvetica','normal'); doc.setFontSize(8.5);
+      doc.text(val||'—', x, y+4.5);
+      doc.setDrawColor(200,210,220); doc.setLineWidth(.25); doc.line(x, y+6, x+fw-3, y+6);
     };
-
-    const v = (id) => (document.getElementById(id)?.value || '').trim();
 
     // STAGIAIRE
     section('Stagiaire');
-    field('Nom', v('nom'), margin, contentW / 2);
-    field('Prénom', v('prenom'), margin + contentW / 2, contentW / 2);
-    y += 11;
-    field('Date de naissance', v('dateNaissance'), margin, contentW / 3);
-    field('Téléphone', v('tel'), margin + contentW / 3, contentW / 3);
-    field('E-mail', v('email'), margin + (contentW / 3) * 2, contentW / 3);
-    y += 11;
-    field('Adresse', v('adresse'), margin, contentW);
-    y += 11;
-    field('Code postal', v('codePostal'), margin, contentW / 3);
-    field('Ville', v('ville'), margin + contentW / 3, (contentW / 3) * 2);
-    y += 11;
-    field('Personne à prévenir en cas d\'urgence', v('urgence'), margin, contentW);
-    y += 12;
+    field('Nom', v('nom'), M, CW/2); field('Prénom', v('prenom'), M+CW/2, CW/2); y+=11;
+    field('Date de naissance', v('dateNaissance'), M, CW/3); field('Téléphone', v('tel'), M+CW/3, CW/3); field('E-mail', v('email'), M+2*CW/3, CW/3); y+=11;
+    field('Adresse', v('adresse'), M, CW); y+=11;
+    field('Code postal', v('cp'), M, CW/3); field('Ville', v('ville'), M+CW/3, 2*CW/3); y+=11;
+    field("Personne à prévenir en cas d'urgence", v('urgence'), M, CW); y+=12;
 
     // SIGNATAIRE
-    const sigNom = v('sigNom');
-    if (sigNom) {
+    if (v('sigNom')) {
       section('Personne signataire (pour les stagiaires mineurs)');
-      field('Nom', sigNom, margin, contentW / 2);
-      field('Prénom', v('sigPrenom'), margin + contentW / 2, contentW / 2);
-      y += 11;
-      field('Date de naissance', v('sigDateNaissance'), margin, contentW / 3);
-      field('Téléphone', v('sigTel'), margin + contentW / 3, contentW / 3);
-      field('E-mail', v('sigEmail'), margin + (contentW / 3) * 2, contentW / 3);
-      y += 11;
-      field('Adresse', v('sigAdresse'), margin, contentW);
-      y += 11;
-      field('Code postal', v('sigCp'), margin, contentW / 3);
-      field('Ville', v('sigVille'), margin + contentW / 3, (contentW / 3) * 2);
-      y += 12;
+      field('Nom', v('sigNom'), M, CW/2); field('Prénom', v('sigPrenom'), M+CW/2, CW/2); y+=11;
+      field('Date de naissance', v('sigDdn'), M, CW/3); field('Téléphone', v('sigTel'), M+CW/3, CW/3); field('E-mail', v('sigEmail'), M+2*CW/3, CW/3); y+=11;
+      field('Adresse', v('sigAdresse'), M, CW); y+=11;
+      field('Code postal', v('sigCp'), M, CW/3); field('Ville', v('sigVille'), M+CW/3, 2*CW/3); y+=12;
     }
 
     // ACTIVITÉ
     section('Activité choisie');
-    doc.setTextColor(20, 20, 20);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(9.5);
-    doc.text(getActivite(), margin + 3, y + 1);
-    y += 6;
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(7.5);
-    doc.setTextColor(...muted);
-    doc.text('Samedis de 14h à 17h · 12, 19, 26 sept · 3, 10, 17 oct · 7, 14, 21 nov 2026', margin + 3, y);
-    y += 10;
+    doc.setTextColor(...black); doc.setFont('helvetica','bold'); doc.setFontSize(9);
+    doc.text(getActivite(), M+3, y+1); y+=5;
+    doc.setFont('helvetica','normal'); doc.setFontSize(7); doc.setTextColor(...muted);
+    doc.text('Samedis de 14h à 17h · 12, 19, 26 sept · 3, 10, 17 oct · 7, 14, 21 nov 2026', M+3, y); y+=10;
 
     // CLAUSES
     section('Déclarations et autorisations');
@@ -900,68 +658,44 @@
       'Autorise le stagiaire mineur à pratiquer les activités nautiques du CNPA.',
       'Déclare avoir été informé(e) sur les capacités requises pour la pratique des activités du CNPA.',
       'Atteste que le stagiaire est apte aux activités nautiques (nage 50 m dès 16 ans, 25 m avant 16 ans) et ne présente aucune contre-indication.',
-      'Autorise le CNPA à conduire le stagiaire dans un établissement hospitalier en cas d\'urgence.',
+      "Autorise le CNPA à conduire le stagiaire dans un établissement hospitalier en cas d'urgence.",
       'Autorise le CNPA à utiliser les images et vidéos prises lors du stage pour la promotion des activités.',
-      'Déclare avoir pris connaissance et accepté les modalités d\'inscription.',
+      "Déclare avoir pris connaissance et accepté les modalités d'inscription.",
     ];
-    const rentrerSeul = document.querySelector('input[name="rentrerSeul"]:checked')?.value === 'oui' ? 'Oui' : 'Non';
+    const rentrer = document.querySelector('input[name="rentrerSeul"]:checked')?.value === 'oui' ? 'Oui' : 'Non';
     doc.setFontSize(7.5);
-    clauses.forEach((c, i) => {
-      doc.setTextColor(...wave);
-      doc.setFont('helvetica', 'bold');
-      doc.text('✔', margin + 1, y);
-      doc.setFont('helvetica', 'normal');
-      doc.setTextColor(40, 40, 40);
-      const lines = doc.splitTextToSize(c, contentW - 10);
-      doc.text(lines, margin + 7, y);
-      y += lines.length * 4.2 + 1.5;
+    clauses.forEach(c => {
+      doc.setTextColor(...blue); doc.setFont('helvetica','bold'); doc.text('✓', M+2, y);
+      doc.setFont('helvetica','normal'); doc.setTextColor(...black);
+      const lines = doc.splitTextToSize(c, CW-10); doc.text(lines, M+8, y); y += lines.length*4+1.5;
     });
-
-    doc.setTextColor(40, 40, 40);
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(8);
-    doc.text(`Autorise le stagiaire à rentrer seul après la séance : ${rentrerSeul}`, margin + 3, y);
-    y += 10;
+    doc.setTextColor(...black); doc.setFont('helvetica','normal'); doc.setFontSize(8);
+    doc.text(`Autorisation de rentrer seul après la séance : ${rentrer}`, M+3, y); y+=10;
 
     // SIGNATURE
     section('Signature');
     const sigData = canvas.toDataURL('image/png');
-    doc.addImage(sigData, 'PNG', margin, y, 70, 28);
-    doc.setTextColor(...muted);
-    doc.setFontSize(7.5);
-    doc.text(`Fait à : ${v('lieuSig')}`, margin + 75, y + 8);
-    doc.text(`Le : ${v('dateSig')}`, margin + 75, y + 14);
-    doc.setFont('helvetica', 'italic');
-    doc.setFontSize(6.5);
-    doc.text('Signature avec mention « lu et approuvé » — pour les mineurs : « valant autorisation parentale »', margin, y + 32);
-    y += 38;
+    doc.addImage(sigData, 'PNG', M, y, 70, 28);
+    doc.setTextColor(...muted); doc.setFont('helvetica','normal'); doc.setFontSize(7.5);
+    doc.text(`Fait à : ${v('lieuSig')}`, M+75, y+8);
+    doc.text(`Le : ${v('dateSig')}`, M+75, y+15);
+    doc.setFont('helvetica','italic'); doc.setFontSize(6.5);
+    doc.text("Signature avec mention « lu et approuvé » — pour les mineurs : « valant autorisation parentale »", M, y+32);
+    y+=40;
 
-    // PAGE 2 — MODALITÉS
-    doc.addPage();
-    y = 18;
-
-    doc.setFillColor(...ocean);
-    doc.rect(0, 0, 210, 22, 'F');
-    doc.setTextColor(255, 255, 255);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(11);
-    doc.text('MODALITÉS D\'INSCRIPTION — SAMEDIS LOISIR', 105, 13, { align: 'center' });
-    y = 32;
+    // ── PAGE 2 : MODALITÉS ──
+    doc.addPage(); y=22;
+    doc.setFillColor(...darkBlue); doc.rect(0,0,210,22,'F');
+    doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(11);
+    doc.text("MODALITÉS D'INSCRIPTION — SAMEDIS LOISIR AUTOMNE 2026", 105, 13, { align:'center' });
+    y=32;
 
     const modBloc = (titre, texte) => {
-      doc.setFillColor(...light);
-      doc.rect(margin, y, contentW, 6.5, 'F');
-      doc.setTextColor(...wave);
-      doc.setFont('helvetica', 'bold');
-      doc.setFontSize(8);
-      doc.text(titre, margin + 3, y + 4.5);
-      y += 9;
-      doc.setFont('helvetica', 'normal');
-      doc.setFontSize(8);
-      doc.setTextColor(40, 40, 40);
-      const lines = doc.splitTextToSize(texte, contentW - 4);
-      doc.text(lines, margin + 3, y);
-      y += lines.length * 4.5 + 6;
+      doc.setFillColor(...gray); doc.rect(M, y, CW, 6, 'F');
+      doc.setTextColor(...blue); doc.setFont('helvetica','bold'); doc.setFontSize(7.5);
+      doc.text(titre, M+3, y+4.2); y+=8;
+      doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(...black);
+      const lines = doc.splitTextToSize(texte, CW-4); doc.text(lines, M+3, y); y+=lines.length*4.5+6;
     };
 
     modBloc('Déroulement des séances',
@@ -969,86 +703,63 @@
     modBloc('Adhésion',
       "L'adhésion au CNPA (8 €) est obligatoire pour la pratique du loisir. Elle est valable du 1er septembre 2026 au 31 août 2027.");
     modBloc('Tarifs',
-      "Plein tarif : 126 € pour la saison + 8 € d'adhésion. Résident à l'année : 63 € sur présentation de la carte d'électeur + 8 € d'adhésion. Le règlement est à effectuer avant le début de la saison.");
+      "Plein tarif : 126 € pour la saison + 8 € d'adhésion. Résident à l'année (carte d'électeur) : 63 € + 8 € d'adhésion. Règlement à effectuer avant le début de la saison.");
     modBloc('Absences et remboursements',
-      "Aucun avoir ne sera accordé pour les séances non effectuées, sauf sur présentation d'un certificat médical. Pour la bonne organisation des séances, les participants sont invités à informer le CNPA de toute absence dans les meilleurs délais, via un lien Framadate communiqué début septembre 2026.");
+      "Aucun avoir ne sera accordé pour les séances non effectuées, sauf sur présentation d'un certificat médical. Pour la bonne organisation des séances, merci d'informer le CNPA de toute absence dans les meilleurs délais, via le lien Framadate communiqué début septembre 2026.");
     modBloc('Annulation par le CNPA',
-      "En cas d'annulation de la part du CNPA, notamment pour cause de météo défavorable, un avoir d'une durée d'un an sera généré.");
+      "En cas d'annulation de la part du CNPA (notamment pour cause de météo défavorable), un avoir d'une durée d'un an sera généré.");
 
-    // Pied de page
-    const totalPages = doc.internal.getNumberOfPages();
-    for (let i = 1; i <= totalPages; i++) {
+    // Footer
+    const pages = doc.internal.getNumberOfPages();
+    for (let i=1; i<=pages; i++) {
       doc.setPage(i);
-      doc.setDrawColor(...wave);
-      doc.setLineWidth(0.3);
-      doc.line(margin, 287, pageW - margin, 287);
-      doc.setFont('helvetica', 'normal');
-      doc.setFontSize(6.5);
-      doc.setTextColor(...muted);
-      doc.text('CNPA – Centre Nautique et de Plein Air de Lesconil · 2 rue Victor Hugo, 29740 Lesconil · contact@centrenautiquelesconil.com', 105, 291, { align: 'center' });
-      doc.text(`Page ${i} / ${totalPages}`, pageW - margin, 291, { align: 'right' });
+      doc.setDrawColor(...blue); doc.setLineWidth(.25); doc.line(M,287,W-M,287);
+      doc.setFont('helvetica','normal'); doc.setFontSize(6.5); doc.setTextColor(...muted);
+      doc.text('CNPA – Centre Nautique et de Plein Air de Lesconil · 2 rue Victor Hugo, 29740 Lesconil · contact@centrenautiquelesconil.com · 02 98 87 89 43', 105, 291, { align:'center' });
+      doc.text(`Page ${i} / ${pages}`, W-M, 291, { align:'right' });
     }
 
     return doc;
   }
 
-  // === SUBMIT ===
+  // ── SUBMIT ──
   document.getElementById('inscriptionForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    const errorBox = document.getElementById('formError');
-    if (!validate()) {
-      errorBox.classList.add('visible');
-      errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      return;
-    }
-    errorBox.classList.remove('visible');
+    const errBox = document.getElementById('formError');
+    if (!validate()) { errBox.classList.add('show'); errBox.scrollIntoView({behavior:'smooth',block:'center'}); return; }
+    errBox.classList.remove('show');
 
     const btn = document.getElementById('submitBtn');
-    btn.disabled = true;
-    btn.textContent = 'Génération du PDF…';
+    btn.disabled = true; btn.textContent = 'Génération du PDF…';
 
     setTimeout(() => {
       try {
         const doc = buildPDF();
-        const pdfBlob = doc.output('blob');
-        const pdfUrl = URL.createObjectURL(pdfBlob);
-
-        // Téléchargement auto
+        const nom    = v('nom').toLowerCase().replace(/\s+/g,'_');
+        const prenom = v('prenom').toLowerCase().replace(/\s+/g,'_');
+        const blob   = doc.output('blob');
+        const url    = URL.createObjectURL(blob);
         const a = document.createElement('a');
-        const nom = document.getElementById('nom').value.trim().toLowerCase().replace(/\s+/g, '_');
-        const prenom = document.getElementById('prenom').value.trim().toLowerCase().replace(/\s+/g, '_');
-        a.href = pdfUrl;
-        a.download = `inscription_loisir_automne_2026_${nom}_${prenom}.pdf`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+        a.href = url; a.download = `inscription_loisir_automne_2026_${nom}_${prenom}.pdf`;
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
 
-        // Mailto
         setTimeout(() => {
-          const subject = encodeURIComponent(`Inscription Loisir Automne 2026 – ${document.getElementById('prenom').value} ${document.getElementById('nom').value}`);
-          const body = encodeURIComponent(
-            `Bonjour,\n\nVeuillez trouver ci-joint ma fiche d'inscription pour les Samedis Loisir Automne 2026.\n\nCordialement,\n${document.getElementById('prenom').value} ${document.getElementById('nom').value}`
-          );
-          window.location.href = `mailto:contact@centrenautiquelesconil.com?subject=${subject}&body=${body}`;
+          const subj = encodeURIComponent(`Inscription Loisir Automne 2026 – ${v('prenom')} ${v('nom')}`);
+          const body = encodeURIComponent(`Bonjour,\n\nVeuillez trouver ci-joint ma fiche d'inscription pour les Samedis Loisir Automne 2026.\n\nCordialement,\n${v('prenom')} ${v('nom')}`);
+          window.location.href = `mailto:contact@centrenautiquelesconil.com?subject=${subj}&body=${body}`;
         }, 800);
 
         const toast = document.getElementById('toast');
-        toast.classList.add('visible');
-        setTimeout(() => toast.classList.remove('visible'), 4500);
-
-        btn.disabled = false;
-        btn.textContent = 'Générer et envoyer ma fiche d\'inscription →';
+        toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 4500);
+        btn.disabled = false; btn.textContent = "Générer et envoyer ma fiche d'inscription";
       } catch(err) {
-        console.error(err);
-        btn.disabled = false;
-        btn.textContent = 'Générer et envoyer ma fiche d\'inscription →';
-        alert('Une erreur est survenue lors de la génération du PDF. Veuillez réessayer.');
+        console.error(err); btn.disabled = false; btn.textContent = "Générer et envoyer ma fiche d'inscription";
+        alert('Erreur lors de la génération du PDF. Veuillez réessayer.');
       }
     }, 100);
   });
 
 })();
 </script>
-
 </body>
 </html>
